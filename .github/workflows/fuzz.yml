@@ -34,13 +34,13 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ghcr.io/SpyrosSdougkas/miniwebradio:latest
+        tags: ghcr.io/spyrossdougkas/miniwebradio:latest
 
     - name: Create a directory for storing test cases
       run: mkdir -p ${{ github.workspace }}/miniwebradio-testcases
 
     - name: Run fuzzing campaign
-      run: timeout 300 docker run --rm -v ${{ github.workspace }}/miniwebradio-testcases:/output ghcr.io/SpyrosSdougkas/miniwebradio:latest /fuzz /output || true 
+      run: timeout 300 docker run --rm -v ${{ github.workspace }}/miniwebradio-testcases:/output ghcr.io/spyrossdougkas/miniwebradio:latest /fuzz /output || true 
 
     - name: Change permissions for output folder
       run: sudo chown -R $USER ${{ github.workspace }}/miniwebradio-testcases
